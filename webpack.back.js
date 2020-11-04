@@ -1,16 +1,16 @@
 module.exports = {
     "mode": "development",
     "resolve": {
-        "extensions": [
-            ".js",
-            ".jsx",
-            ".vue",
-            ".ts",
-            ".tsx",
-            ".css",
-            ".less",
-            ".scss"
-        ],
+        // "extensions": [
+        //     ".js",
+        //     ".jsx",
+        //     ".vue",
+        //     ".ts",
+        //     ".tsx",
+        //     ".css",
+        //     ".less",
+        //     ".scss"
+        // ],
         "alias": {
             "site-mobile-shared": "E:\\workspace\\ui-by-vant-created\\node_modules\\@vant\\cli\\dist\\site-mobile-shared.js",
             "site-desktop-shared": "E:\\workspace\\ui-by-vant-created\\node_modules\\@vant\\cli\\dist\\site-desktop-shared.js"

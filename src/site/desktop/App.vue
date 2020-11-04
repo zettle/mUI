@@ -1,18 +1,27 @@
 <template>
-    <div>App: {{name}}</div>
+    <div class="box">
+        <div>App: <span class="num">{{count}}</span></div>
+        <button @click="addHandler">按钮</button>
+    </div>
 </template>
 
 <script>
 import { defineComponent, ref } from 'vue';
 export default defineComponent({
     setup () {
-        const name = ref('小明');
-
-        return {name};
+        const count = ref(0);
+        const addHandler = () => {
+            count.value++;
+        };
+        return {count, addHandler};
     }
 });
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+.box {
+    .num {
+        color: red;
+    }
+}
 </style>
