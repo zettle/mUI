@@ -5,11 +5,11 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent, ref } from 'vue';
 export default defineComponent({
     setup () {
-        const count = ref(0);
+        const count = ref('sdf');
         const addHandler = () => {
             count.value++;
         };
@@ -18,10 +18,27 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
+<style>
+.box {
+    border: 1px solid red;
+    display: flex;
+}
+.kjk {
+    color: blue;
+}
+</style>
+<style lang="less" scoped>
+@red: red;
 .box {
     .num {
-        color: red;
+        color: @red;
     }
+}
+</style>
+
+<style lang="scss" scoped>
+$green: green;
+.box {
+    background: $green;
 }
 </style>

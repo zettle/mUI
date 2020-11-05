@@ -44,3 +44,62 @@ plugins: [
     new VueLoaderPlugin()
 ]
 ```
+
+### 2. 解析css
+
+安装: `npm i -D style-loader css-loader postcss-loader autoprefixer`
+
+在根目录新建 `postcss.config.js` 内容如下:
+```js
+module.exports = {
+    plugins: {
+        autoprefixer: {},
+    }
+};
+```
+提示 `Error: PostCSS plugin autoprefixer requires PostCSS 8.`。
+
+经过查看原来autoprefixer安装的版本是`@10`。而node_modules里面的postcss版本是`@7`
+
+解决方式是降低 `autoprefixer` 版本或者提高`postcss` 的版本。执行`npm i autoprefixer@8` 或者 `npm i postcss@8`
+
+
+### 2. 解析less
+解析less，只需要在上面处理css之前加上下面less-loader的处理即可
+
+安装: `npm i -D less less-loader`
+
+修改webpack配置
+```js
+// /config/webpack.base.cfg.js
+{
+    test: /\.less$/,
+    sideEffects: true,
+    use: [...cssLoaders, 'less-loader']
+}
+```
+
+### 3. 解析scss
+解析scss，我们推荐使用dart-sass来编译sass，速度很快，不要搞node-sass环境
+安装: `npm i -D sass sass-loader`
+
+修改webpack配置
+```js
+// /config/webpack.base.cfg.js
+{
+    test: /\.scss$/,
+    sideEffects: true,
+    use: [...cssLoaders, {
+        loader: 'sass-loader',
+        options: { 
+            implementation: require('sass'), // 使用dart-sass来解析，不用node-sass
+        }
+    }]
+}
+```
+
+
+### 4. 解析js|ts|jsx|tsx
+使用babel来解析js和ts等文件
+
+安装: `npm i -D babel-loader @babel/core`

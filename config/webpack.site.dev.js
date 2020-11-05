@@ -10,7 +10,7 @@ const { srcPath, sitInfo, mobileInfo } = require('./constant');
  */
 function getSiteDevConfig () {
     return merge(webpackBaseCfg, {
-        mode: 'development',
+        mode: 'development', // development production
         entry: {
             'site-desktop': resolve(srcPath, 'site/desktop/main.js'),
             'site-mobile': resolve(srcPath, 'site/mobile/main.js'),
@@ -30,6 +30,10 @@ function getSiteDevConfig () {
         devServer: {
             port: 8080,
             host: '0.0.0.0'
+            // quiet: true, // ?? 有何作用
+            // stats: "errors-only", // ?? 有何作用
+            // publicPath: "/", // ?? 有何作用
+            // disableHostCheck: true // ?? 有何作用
         },
         output: {
             chunkFilename: '[name].js'

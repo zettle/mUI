@@ -1,16 +1,5 @@
 module.exports = {
-    "mode": "development",
     "resolve": {
-        // "extensions": [
-        //     ".js",
-        //     ".jsx",
-        //     ".vue",
-        //     ".ts",
-        //     ".tsx",
-        //     ".css",
-        //     ".less",
-        //     ".scss"
-        // ],
         "alias": {
             "site-mobile-shared": "E:\\workspace\\ui-by-vant-created\\node_modules\\@vant\\cli\\dist\\site-mobile-shared.js",
             "site-desktop-shared": "E:\\workspace\\ui-by-vant-created\\node_modules\\@vant\\cli\\dist\\site-desktop-shared.js"
@@ -18,25 +7,6 @@ module.exports = {
     },
     "module": {
         "rules": [
-            {
-                "test": /\.vue$/,
-                "use": [
-                    {
-                        "loader": "cache-loader",
-                        "options": {
-                            "cacheDirectory": "E:\\workspace\\ui-by-vant-created\\node_modules\\.cache"
-                        }
-                    },
-                    {
-                        "loader": "vue-loader",
-                        "options": {
-                            "compilerOptions": {
-                                "preserveWhitespace": false
-                            }
-                        }
-                    }
-                ]
-            },
             {
                 test: /\.(js|ts|jsx|tsx)$/,
                 exclude: /node_modules\/(?!(@vant\/cli))/,
@@ -48,22 +18,6 @@ module.exports = {
                         }
                     },
                     "babel-loader"
-                ]
-            },
-            {
-                test: /\.css$/,
-                "sideEffects": true,
-                "use": [
-                    "style-loader",
-                    "css-loader",
-                    {
-                        "loader": "postcss-loader",
-                        "options": {
-                            "config": {
-                                "path": "E:\\workspace\\ui-by-vant-created\\node_modules\\@vant\\cli\\lib\\config\\postcss.config.js"
-                            }
-                        }
-                    }
                 ]
             },
             {
@@ -247,25 +201,6 @@ module.exports = {
             "version": 4
         }
     ],
-    // "entry": {
-    //     "site-desktop": [
-    //         "E:\\workspace\\ui-by-vant-created\\node_modules\\@vant\\cli\\site\\desktop\\main.js"
-    //     ],
-    //     "site-mobile": [
-    //         "E:\\workspace\\ui-by-vant-created\\node_modules\\@vant\\cli\\site\\mobile\\main.js"
-    //     ]
-    // },
-    "devServer": {
-        // "port": 8080,
-        "quiet": true,
-        // "host": "0.0.0.0",
-        "stats": "errors-only",
-        "publicPath": "/",
-        "disableHostCheck": true
-    },
-    // "output": {
-    //     "chunkFilename": "[name].js"
-    // },
     "optimization": {
         "splitChunks": {
             "cacheGroups": {
