@@ -1,7 +1,7 @@
 <template>
     <div class="box">
         <div>App: <span class="num">{{count}}</span></div>
-        <button @click="addHandler">按钮</button>
+        <button @click="addHandler">按钮dd</button>
     </div>
 </template>
 
@@ -9,7 +9,7 @@
 import { defineComponent, ref } from 'vue';
 export default defineComponent({
     setup () {
-        const count = ref('sdf');
+        let count = ref(2);
         const addHandler = () => {
             count.value++;
         };

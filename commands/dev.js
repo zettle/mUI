@@ -7,9 +7,6 @@ const { getPort } = require('portfinder');
 const { getSiteDevConfig } = require('../config/webpack.site.dev');
 
 const config = getSiteDevConfig();
-console.log('=======');
-console.log(config);
-console.log('=======');
 
 /**
  * 控制台打印端口
@@ -33,6 +30,7 @@ function runDevServer(port, config) {
         if (err) {
           console.log(err);
         }
+        logServerInfo(port);
     });
 }
 
@@ -47,8 +45,6 @@ function watch() {
             console.log(err);
             return;
         }
-    
-        logServerInfo(port);
         runDevServer(port, config);
     });
 }

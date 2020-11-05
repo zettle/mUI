@@ -12,19 +12,22 @@ function getSiteDevConfig () {
     return merge(webpackBaseCfg, {
         mode: 'development', // development production
         entry: {
-            'site-desktop': resolve(srcPath, 'site/desktop/main.js'),
-            'site-mobile': resolve(srcPath, 'site/mobile/main.js'),
+            'site-desktop': resolve(srcPath, 'site/desktop/main.ts'),
+            'site-mobile': resolve(srcPath, 'site/mobile/main.ts'),
         },
         resolve: {
             extensions: [
                 '.js',
                 '.jsx',
-                '.vue',
+                // 到了集成ts进去后，在 `shims-vue.d.ts` 上声明.vue文件的类型，然后再引入的时候不要省略.vue后缀，就可以让ts很好的识别
+                // 所以这里就不要省略了
+                // '.vue', 
                 '.ts',
                 '.tsx',
-                '.css',
-                '.less',
-                '.scss'
+                // 对于css这种文件，不要省略后缀名，这样更好的一眼看出
+                // '.css',
+                // '.less',
+                // '.scss'
             ]
         },
         devServer: {

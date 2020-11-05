@@ -1,3 +1,6 @@
+const webpack = require('webpack');
+const ForkTsCheckerPlugin = require('fork-ts-checker-webpack-plugin');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const { resolve } = require('path');
 const { VueLoaderPlugin } = require('vue-loader');
 
@@ -44,7 +47,7 @@ const webpackBaseCfg = {
             {
                 test: /\.(js|ts|jsx|tsx)$/,
                 // exclude: /node_modules\/(?!(@vant\/cli))/,
-                // exclude: /node_modules/,
+                exclude: /node_modules/,
                 use: [cache_loader, 'babel-loader'],
             },
             // ccs的处理
@@ -70,10 +73,46 @@ const webpackBaseCfg = {
                     }
                 }]
             }
+            // {
+            //     test: /\.md$/,
+            //     use: []
+            // }
         ]
     },
     plugins: [
-        new VueLoaderPlugin()
+        // 暂不知道为什么暴露这2个 ???有何作用
+        new webpack.DefinePlugin({
+            __VUE_OPTIONS_API__: 'true',
+            __VUE_PROD_DEVTOOLS__: 'false',
+        }),
+        new VueLoaderPlugin(),
+        new FriendlyErrorsWebpackPlugin({
+            // quiet: true,
+            // clearConsole: false,
+            // logLevel: 'WARNING',
+        }),
+        new ForkTsCheckerPlugin({
+            typescript: {
+                extensions: {
+                    vue: {
+                        enabled: true,
+                        compiler: '@vue/compiler-sfc',
+                    },
+                },
+            },
+            logger: {
+                issues: {
+                    // skip info message
+                    log() {},
+                    warn(message) {
+                        console.warn(message);
+                    },
+                    error(message) {
+                        console.error(message);
+                    },
+                },
+            },
+        })
     ]
 };
 

@@ -14,7 +14,6 @@
 
 
 
-
 ## 遇到的问题
 
 ### 1. 解析vue单文件
@@ -119,3 +118,76 @@ module.exports = {
     ]
 };
 ```
+
+添加ts的类型检查
+
+安装: `npm i -D fork-ts-checker-webpack-plugin typescript`
+
+在根目录新建`tsconfig.json`，内容如下（从vue@3脚手架中复制过来）
+```json
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "esnext",
+        "strict": true,
+        "jsx": "preserve",
+        "importHelpers": true,
+        "moduleResolution": "node",
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "sourceMap": true,
+        "baseUrl": ".",
+        "types": [
+            "webpack-env"
+        ],
+        "paths": {
+            "@/*": [
+                "src/*"
+            ]
+        },
+        "lib": [
+            "esnext",
+            "dom",
+            "dom.iterable",
+            "scripthost"
+        ]
+    },
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "src/**/*.vue",
+        "tests/**/*.ts",
+        "tests/**/*.tsx"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
+```
+因为上面有引入了`webpack-env`， 所以安装下其声明文件
+
+安装: `npm i -D @types/webpack-env`
+
+这样子，只要不符合ts的规则的，就会报错
+
+但是引入vue文件的地方也报错了，比如下面
+```js
+import { createApp } from 'vue';
+import App from './App'; // 会提示 找不到模块“./App”或其相应的类型声明。
+
+createApp(App).mount('#app');
+```
+解决这个问题，首先创建声明文件`shims-vue.d.ts`
+```
+declare module '*.vue' {
+    import type { DefineComponent } from 'vue';
+    const component: DefineComponent<{}, {}, any>;
+    export default component;
+}
+```
+然后引入的时候，不要省略 `.vue` 后缀，ts就能自动识别
+```js
+import App from './App.vue';
+```
+
