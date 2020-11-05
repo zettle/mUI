@@ -102,4 +102,20 @@ module.exports = {
 ### 4. 解析js|ts|jsx|tsx
 使用babel来解析js和ts等文件
 
-安装: `npm i -D babel-loader @babel/core`
+安装: `npm i -D babel-loader @babel/core @babel/plugin-transform-runtime babel-plugin-import @vue/babel-plugin-jsx @babel/plugin-transform-object-assign @babel/preset-env @babel/preset-typescript`
+
+编辑`babel.config.js` 内容如下:
+```js
+module.exports = {
+    presets: [
+        [ '@babel/preset-env', { loose: true, modules: false } ],
+        '@babel/preset-typescript'
+    ],
+    plugins: [
+        [ '@babel/plugin-transform-runtime', { corejs: false, useESModules: true } ],
+        [ 'import', { libraryName: 'vant', libraryDirectory: 'es', style: true }, 'vant' ],
+        '@vue/babel-plugin-jsx',
+        '@babel/plugin-transform-object-assign'
+    ]
+};
+```
