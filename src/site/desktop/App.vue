@@ -9,7 +9,7 @@
 import { defineComponent, ref } from 'vue';
 export default defineComponent({
     setup () {
-        let count = ref(2);
+        let count = ref(1);
         const addHandler = () => {
             count.value++;
         };

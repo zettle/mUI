@@ -113,7 +113,14 @@ const webpackBaseCfg = {
                 },
             },
         })
-    ]
+    ],
+    // webpack5的持久化缓存
+    cache: {
+        type: 'filesystem',
+        buildDependencies: {
+          config: [__filename],
+        },
+    }
 };
 
 module.exports = webpackBaseCfg;

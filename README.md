@@ -11,7 +11,7 @@
 - [html-webpack-plugin](https://www.webpackjs.com/plugins/html-webpack-plugin/): webpakc插件，生成html
 - [webpack-merge](https://www.cnblogs.com/cczlovexw/p/11765571.html): 合并webpack配置
 - [vue-loader](https://loulanyijian.github.io/vue-loader-doc-Chinese/): 解析vue单文件 
-
+- [webpackbar](https://blog.csdn.net/qq_40524880/article/details/105533102): 添加打包/启动进度条
 
 
 ## 遇到的问题

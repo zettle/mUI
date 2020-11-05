@@ -1,3 +1,4 @@
+const WebpackBar = require('webpackbar');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { merge } = require('webpack-merge');
 const { resolve } = require('path');
@@ -32,16 +33,33 @@ function getSiteDevConfig () {
         },
         devServer: {
             port: 8080,
-            host: '0.0.0.0'
-            // quiet: true, // ?? 有何作用
-            // stats: "errors-only", // ?? 有何作用
-            // publicPath: "/", // ?? 有何作用
-            // disableHostCheck: true // ?? 有何作用
+            host: '0.0.0.0',
+            quiet: true, // ?? 有何作用
+            stats: "errors-only", // ?? 有何作用
+            publicPath: "/", // ?? 有何作用
+            disableHostCheck: true // ?? 有何作用
         },
         output: {
             chunkFilename: '[name].js'
         },
+        optimization: {
+            splitChunks: {
+                cacheGroups: {
+                    chunks: {
+                        chunks: 'all',
+                        minChunks: 2,
+                        minSize: 0,
+                        name: 'chunks',
+                    }
+              }
+            }
+        },
         plugins: [
+            // 构建进度条
+            new WebpackBar({
+                name: 'my mUI',
+                color: '#07c160',
+            }),
             new HtmlWebpackPlugin({
                 title: sitInfo.title,
                 description: sitInfo.description,
